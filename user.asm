@@ -1,14 +1,12 @@
 		.text
 		.globl 	u_turn
-u_turn:		la	$a0, u_turn_msg		# gets users move
-		li	$v0, 4
-		syscall
-		li	$v0, 12
+u_turn:		li	$v0, 12			# get user's move
 		syscall
 		move	$s0, $v0		# store row in $s0
 		li	$v0, 5
 		syscall
 		move	$s1, $v0		# store col in $s1
+		addi	$s1, $s1, -1		# subtract 1 from col to simplify byte address calculation
 		sub	$s0, $s0, $s2		# convert from row letter into row number
 						# col_bias is still saved in $s2
 		
@@ -42,18 +40,16 @@ empty_space:	beq	$t0, $zero, even_row
 		j	update_board
 even_row:	lbu	$t3, hor_line
 update_board:	sb	$t3, board($t2)		# update byte at appropriate address
-									
-return_main:	j	main
+
+		move	$a0, $s0		# set args and call check_boxes
+		move	$a1, $s1
+		j	check_boxes
+		
+# return_main:	j	main
 		
 		.data
-u_turn_msg:	.asciiz "It's your turn! Enter the gridspace you want to place a line at (enter a letter first then a number i.e. B0, A1, etc).\nEnter your move: "
-oor_col:	.asciiz "Selected column is out of range! Make sure that your column letter is capitalized and comes before your row number. Try again.\n"
-oor_row:	.asciiz "Selected row is out of range! Make sure your row number comes after your column letter. Try again.\n"
-inv_space:	.asciiz "You can't place a line here because it is a dot or the center of a box! Try again.\n"
-occ_space:	.asciiz "You can't place a line here because it already has a line! Try again.\n"
-		.align	2
-hor_line:	.ascii	"-"			# probably a better way to do this?
-		.align	2
-ver_line:	.ascii	"|"
-		.align 2
-space:		.ascii	" "
+oor_col:	.asciiz "Selected column is out of range! Make sure that your column number is between 1 and 15. Try again.\nEnter your move: "
+oor_row:	.asciiz "Selected row is out of range! Make sure your row letter is a capital letter between A and K. Try again.\nEnter your move: "
+inv_space:	.asciiz "You can't place a line here because it is a dot or the center of a box! Try again.\nEnter your move: "
+occ_space:	.asciiz "You can't place a line here because it already has a line! Try again.\nEnter your move: "
+
