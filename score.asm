@@ -78,6 +78,7 @@ check_below:	add	$t0, $s0, 16			# set $t0 to the address of the center of the bo
 		# update score and turn in memory
 update_score:	beq	$s1, $zero, no_points		# branch to no_points if no points were scored
 		bne	$s3, $zero, is_comp		# branch to is_comp if it's the computer's turn
+		
 		lw	$t0, u_score			# load the user's score into memory
 		add	$t0, $t0, $s1			# add points gained to user's score
 		sw	$t0, u_score			# store sum back to memory in u_score

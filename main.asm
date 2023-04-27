@@ -51,10 +51,10 @@ check_end:	add	$t2, $t0, $t1		# check if sum of user and comp score is 35
 		li	$t3, 35
 		bge	$t2, $t3, game_end
 		
-		li	$a0, 1000		# pause for user to see updated score and what moves were made
+	#	li	$a0, 1000		# pause for user to see updated score and what moves were made
 						# consider changing this to only run before computer's turn
-		li	$v0, 32
-		syscall
+	#	li	$v0, 32
+	#	syscall
 		
 		li	$v0, 4			# prepare for print string syscall
 		lw	$t0, turn		# determine whose turn it is and jump accordingly
@@ -67,8 +67,7 @@ else_turn:	la	$a0, c_turn_msg		# display u_turn_msg
 		syscall
 		j	u_turn			# in the real program, jump to computer's turn subroutine in other file
 		
-game_end:	beq	$t0, $t1, tie		# check for who won the game/tie
-		blt	$t0, $t1, c_win
+game_end:	blt	$t0, $t1, c_win		# check for who won the game
 		
 u_win:		la	$a0, u_win_msg
 		li	$v0, 4
@@ -76,11 +75,6 @@ u_win:		la	$a0, u_win_msg
 		j	end
 		
 c_win:		la	$a0, c_win_msg
-		li	$v0, 4
-		syscall
-		j	end
-		
-tie:		la	$a0, tie_msg
 		li	$v0, 4
 		syscall
 
@@ -96,7 +90,7 @@ end:		li	$v0, 10
 		.globl	ver_line
 		.globl	space
 		.asciiz "+++++++++++++++"	# this is stored in memory to ensure that box checking logic works
-board:		.asciiz	"+ + + + + + + +"
+board:		.asciiz	"+ + + + + + + +"	# may not be necessary?
 		.asciiz "               "
 		.asciiz	"+ + + + + + + +"
 		.asciiz "               "
