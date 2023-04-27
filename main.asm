@@ -2,6 +2,9 @@
 		.globl 	main
 		
 main:		# display the current board
+		la	$a0, new_line
+		li	$v0, 4
+		syscall
 		li	$t0, 0			# initialize counter
 		li	$t2, 11			# set end condition for looping
 		lw	$s2, col_bias		# store col_bias as a saved temp in $s2

@@ -45,8 +45,6 @@ update_board:	sb	$t3, board($t2)		# update byte at appropriate address
 		move	$a1, $s1
 		j	check_boxes
 		
-# return_main:	j	main
-		
 		.data
 oor_col:	.asciiz "Selected column is out of range! Make sure that your column number is between 1 and 15. Try again.\nEnter your move: "
 oor_row:	.asciiz "Selected row is out of range! Make sure your row letter is a capital letter between A and K. Try again.\nEnter your move: "
