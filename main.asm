@@ -83,23 +83,28 @@ end:		li	$v0, 10
 
 		.data
 		.globl	board
+		.globl	box_line_1
+		.globl	box_line_2
+		.globl	box_line_3
+		.globl	box_line_4
+		.globl	box_line_5
 		.globl	turn
 		.globl	u_score
 		.globl	c_score
 		.globl	hor_line
 		.globl	ver_line
 		.globl	space
-		.asciiz "+++++++++++++++"	# this is stored in memory to ensure that box checking logic works
-board:		.asciiz	"+ + + + + + + +"	# may not be necessary?
-		.asciiz "               "
+		.asciiz "+++++++++++++++"	# this is stored in memory to ensure that box checking logic works              "
+board:		.asciiz	"+ + + + + + + +"
+box_line_1:	.asciiz "               "
 		.asciiz	"+ + + + + + + +"
-		.asciiz "               "
+box_line_2:	.asciiz "               "
 		.asciiz	"+ + + + + + + +"
-		.asciiz "               "
+box_line_3:	.asciiz "               "
 		.asciiz	"+ + + + + + + +"
-		.asciiz "               "
+box_line_4:	.asciiz "               "
 		.asciiz	"+ + + + + + + +"
-		.asciiz "               "
+box_line_5:	.asciiz "               "
 		.asciiz	"+ + + + + + + +"
 		.asciiz "+++++++++++++++"
 board_footer1:	.asciiz "  123456789111111\n"
