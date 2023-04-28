@@ -27,7 +27,16 @@ display_board:	add	$a0, $t0, $s2		# calculate row letter and store in $a0 to pri
 		syscall
 		la	$a0, board_footer2
 		syscall
-					
+		
+		# play test sound
+		#li	$a2, 121
+		#li	$a0, 100
+		#li	$a1, 1000
+		#li	$a3, 100
+		#li	$v0, 31
+		#syscall	
+		
+				
 		# display scores
 		la	$a0, display_u_score
 		li	$v0, 4
@@ -75,13 +84,27 @@ game_end:	blt	$t0, $t1, c_win		# check for who won the game
 u_win:		la	$a0, u_win_msg
 		li	$v0, 4
 		syscall
+		# play win sound
+		# TODO find a good sound
+		li	$a2, 124
+		li	$a0, 100
+		li	$a1, 1000
+		li	$a3, 127
 		j	end
 		
 c_win:		la	$a0, c_win_msg
 		li	$v0, 4
 		syscall
+		# play lose sound
+		# TODO find a good sound
+		li	$a2, 124
+		li	$a0, 100
+		li	$a1, 1000
+		li	$a3, 127
 
-end:		li	$v0, 10
+end:		#li	$v0, 33
+		#syscall				# play sound
+		li	$v0, 10
 		syscall
 
 		.data
