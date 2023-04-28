@@ -27,15 +27,6 @@ display_board:	add	$a0, $t0, $s2		# calculate row letter and store in $a0 to pri
 		syscall
 		la	$a0, board_footer2
 		syscall
-		
-		# play test sound
-		#li	$a2, 115
-		#li	$a0, 45
-		#li	$a1, 2000
-		#li	$a3, 127
-		#li	$v0, 33
-		#syscall
-		
 				
 		# display scores
 		la	$a0, display_u_score
@@ -85,11 +76,32 @@ u_win:		la	$a0, u_win_msg
 		li	$v0, 4
 		syscall
 		# play win sound
-		# TODO find a good sound
-		li	$a2, 124
-		li	$a0, 100
-		li	$a1, 1000
+		li	$a2, 40			# strings
+		li	$a0, 70			# b flat
+		li	$a1, 250
 		li	$a3, 127
+		li	$v0, 33
+		syscall
+		addi	$a0, $a0, 5
+		syscall
+		sll	$a1, $a1, 1
+		addi	$a0, $a0, 5
+		syscall
+		addi	$a0, $a0,-2
+		syscall
+		addi	$a0, $a0,-1
+		syscall
+		srl	$a1, $a1, 1		# set eighth note
+		addi	$a0, $a0,-2
+		syscall
+		addi	$a0, $a0, 5
+		syscall
+		addi	$a0, $a0, 2
+		syscall
+		addi	$a0, $a0, -7
+		syscall
+		sll	$a1, $a1, 2
+		syscall
 		j	end
 		
 c_win:		la	$a0, c_win_msg

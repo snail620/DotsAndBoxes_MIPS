@@ -37,7 +37,7 @@ valid_space:	sll	$t2, $s0, 4		# calculate displacement address of byte to update
 		beq	$t3, $t4, empty_space	# branch if space to place line is currently empty
 		la	$a0, occ_space
 		syscall
-		#j	u_turn
+		#j	u_turn	
 		j	err_sound
 empty_space:	beq	$t0, $zero, even_row
 		lbu	$t3, ver_line
@@ -52,8 +52,8 @@ update_board:	sb	$t3, board($t2)		# update byte at appropriate address
 err_sound:	# play error sound
 		li	$a2, 124
 		li	$a0, 105
-		li	$a1, 300
-		li	$a3, 100
+		li	$a1, 400
+		li	$a3, 127
 		li	$v0, 31
 		syscall
 		j	u_turn

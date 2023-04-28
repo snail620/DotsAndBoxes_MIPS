@@ -84,9 +84,9 @@ update_score:	beq	$s1, $zero, no_points		# branch to no_points if no points were
 		sw	$t0, u_score			# store sum back to memory in u_score
 		# play score sound
 		li	$a2, 121
-		li	$a0, 100
+		li	$a0, 99
 		li	$a1, 1000
-		li	$a3, 100
+		li	$a3, 127
 		li	$v0, 31
 		syscall
 		j	main
@@ -95,11 +95,10 @@ is_comp:	lw	$t0, c_score			# load the computer's score into memory
 		add	$t0, $t0, $s1			# add points gained to computer's score
 		sw	$t0, c_score			# store sum back to memory in c_score
 		# play computer score sound
-		# TODO find a good sound
 		li	$a2, 121
-		li	$a0, 100
+		li	$a0, 71
 		li	$a1, 1000
-		li	$a3, 100
+		li	$a3, 127
 		li	$v0, 31
 		syscall
 		j	main
@@ -111,7 +110,7 @@ no_points:	li	$t0, 1
 		li	$a2, 127
 		li	$a0, 105
 		li	$a1, 1000
-		li	$a3, 100
+		li	$a3, 127
 		li	$v0, 31
 		syscall
 		j	main
