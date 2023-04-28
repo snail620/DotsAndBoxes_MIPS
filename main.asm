@@ -29,12 +29,12 @@ display_board:	add	$a0, $t0, $s2		# calculate row letter and store in $a0 to pri
 		syscall
 		
 		# play test sound
-		#li	$a2, 121
-		#li	$a0, 100
-		#li	$a1, 1000
-		#li	$a3, 100
-		#li	$v0, 31
-		#syscall	
+		#li	$a2, 115
+		#li	$a0, 45
+		#li	$a1, 2000
+		#li	$a3, 127
+		#li	$v0, 33
+		#syscall
 		
 				
 		# display scores
@@ -96,12 +96,11 @@ c_win:		la	$a0, c_win_msg
 		li	$v0, 4
 		syscall
 		# play lose sound
-		# TODO find a good sound
-		li	$a2, 124
-		li	$a0, 100
-		li	$a1, 1000
+		li	$a2, 115
+		li	$a0, 45
+		li	$a1, 2000
 		li	$a3, 127
-
+		
 end:		#li	$v0, 33
 		#syscall				# play sound
 		li	$v0, 10
