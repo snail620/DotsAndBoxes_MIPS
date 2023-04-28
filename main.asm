@@ -27,7 +27,7 @@ display_board:	add	$a0, $t0, $s2		# calculate row letter and store in $a0 to pri
 		syscall
 		la	$a0, board_footer2
 		syscall
-				
+		
 		# display scores
 		la	$a0, display_u_score
 		li	$v0, 4
@@ -110,12 +110,16 @@ c_win:		la	$a0, c_win_msg
 		# play lose sound
 		li	$a2, 115
 		li	$a0, 45
-		li	$a1, 2000
+		li	$a1, 500
 		li	$a3, 127
+		li	$v0, 33
+		syscall
+		li	$a0, 41
+		syscall
+		li	$a0, 38
+		syscall
 		
-end:		#li	$v0, 33
-		#syscall				# play sound
-		li	$v0, 10
+end:		li	$v0, 10
 		syscall
 
 		.data
