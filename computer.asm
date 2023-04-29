@@ -69,6 +69,8 @@ right_check:	lbu $t3, 1($t0)			# check whether the line on the right is present
 update_row_col:	sub $t5, $t4, $t9
 		srl $a0, $t5, 4
 		and $a1, $t5, 15
+		move $s0, $a0
+		move $s1, $a1
 		j end
 		
 end_of_checks:	
@@ -129,7 +131,7 @@ empty_space:	beq	$t0, $zero, even_row
 even_row:	lbu	$t3, hor_line
 update_board:	sb	$t3, board($t2)		# update byte at appropriate address
 
-		# print out computer's move
+end:		# print out computer's move
 		move	$t0, $s0
 		lw	$t1, col_bias
 		add	$t0, $t0, $t1
@@ -152,13 +154,11 @@ update_board:	sb	$t3, board($t2)		# update byte at appropriate address
 		# store row number in $a0 and col number in $a1
 		move	$a0, $s0		# set args and call check_boxes
 		move	$a1, $s1
-		j	check_boxes
 		
+		j	check_boxes
 
 		
 fill_3_unit:	# complete boxes where number of sides = 3
-
-end:		j check_boxes
 
 		.data
 		# box_borders_n: the number of borders for each box on line n
