@@ -65,10 +65,9 @@ check_end:	add	$t2, $t0, $t1		# check if sum of user and comp score is 35
 		
 else_turn:	la	$a0, c_turn_msg		# display u_turn_msg
 		syscall
-		j	c_turn			# in the real program, jump to computer's turn subroutine in other file
+		j	c_turn	
 		
-game_end:	beq	$t0, $t1, tie		# check for who won the game/tie
-		blt	$t0, $t1, c_win
+game_end:	blt	$t0, $t1, c_win
 		
 u_win:		la	$a0, u_win_msg
 		li	$v0, 4
@@ -79,10 +78,6 @@ c_win:		la	$a0, c_win_msg
 		li	$v0, 4
 		syscall
 		j	end
-		
-tie:		la	$a0, tie_msg
-		li	$v0, 4
-		syscall
 
 end:		li	$v0, 10
 		syscall
@@ -122,7 +117,6 @@ c_turn_msg:	.asciiz "It's the computer's turn! Wait for it to make a move.\n\n"
 						# this message may not be needed in the final program
 u_win_msg:	.asciiz "You won the game! Congratulations!\n"
 c_win_msg:	.asciiz "The computer won the game! Better luck next time!\n"
-tie_msg:	.asciiz "The game was a draw!\n"
 new_line:	.asciiz "\n"
 		.align	2
 col_bias:	.ascii	"A"			# used to convert row letter into a number that can be used to calculate byte address
