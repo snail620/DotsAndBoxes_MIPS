@@ -129,6 +129,25 @@ empty_space:	beq	$t0, $zero, even_row
 even_row:	lbu	$t3, hor_line
 update_board:	sb	$t3, board($t2)		# update byte at appropriate address
 
+		# print out computer's move
+		move	$t0, $s0
+		lw	$t1, col_bias
+		add	$t0, $t0, $t1
+		move	$t1, $s1
+		addi	$t1, $t1, 1
+		la	$a0, print_move
+		li	$v0, 4
+		syscall
+		move	$a0, $t0
+		li	$v0, 11
+		syscall
+		move	$a0, $t1
+		li	$v0, 1
+		syscall
+		la	$a0, new_line
+		li	$v0, 4
+		syscall
+		
 		# before jumping to check_boxes
 		# store row number in $a0 and col number in $a1
 		move	$a0, $s0		# set args and call check_boxes
@@ -149,3 +168,5 @@ end:		j check_boxes
 		box_borders_3: .space 28
 		box_borders_4: .space 28
 		box_borders_5: .space 28
+		.align 2
+print_move:	.asciiz "The computer placed a line at "
