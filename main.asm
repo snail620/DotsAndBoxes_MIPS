@@ -68,7 +68,7 @@ check_end:	add	$t2, $t0, $t1
 		
 else_turn:	la	$a0, c_turn_msg		# display c_turn_msg
 		syscall
-		li	$a0, 1000		# pause for user to see updated score and what moves were made\
+		li	$a0, 1500		# pause for user to see updated score and what moves were made\
 						# before the computer moves
 		li	$v0, 32
 		syscall
